@@ -1,6 +1,6 @@
 {
     "name": "vicgonvt/press",
-    "description": "An elegant markdown-powered blog for the Larvel framework.",
+    "description": "An elegant markdown-powered blog for the Laravel framework.",
     "license": "MIT",
     "authors": [
         {
@@ -11,5 +11,15 @@
     "require": {},
     "require-dev": {
         "orchestra/testbench": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "vicgonvt\\Press\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "vicgonvt\\Press\\Tests\\": "tests/"
+        }
     }
 }
