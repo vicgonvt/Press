@@ -2,6 +2,7 @@
 
 namespace vicgonvt\Press\Tests;
 
+use Carbon\Carbon;
 use Orchestra\Testbench\TestCase;
 use vicgonvt\Press\PressFileParser;
 
@@ -16,6 +17,17 @@ class PressFileParserTest extends TestCase
 
         $this->assertContains('title: My Title', $data[1]);
         $this->assertContains('description: Description here', $data[1]);
+        $this->assertContains('Blog post body here', $data[2]);
+    }
+    
+    /** @test */
+    public function a_string_can_also_be_used_instead()
+    {
+        $pressFileParser = (new PressFileParser("---\ntitle: My Title\n---\nBlog post body here"));
+
+        $data = $pressFileParser->getData();
+
+        $this->assertContains('title: My Title', $data[1]);
         $this->assertContains('Blog post body here', $data[2]);
     }
     
@@ -37,6 +49,17 @@ class PressFileParserTest extends TestCase
 
         $data = $pressFileParser->getData();
 
-        $this->assertEquals("# Heading\n\nBlog post body here", $data['body']);
+        $this->assertEquals("<h1>Heading</h1>\n<p>Blog post body here</p>", $data['body']);
+    }
+    
+    /** @test */
+    public function a_date_field_gets_parsed()
+    {
+        $pressFileParser = (new PressFileParser("---\ndate: May 14, 1988\n---\n"));
+
+        $data = $pressFileParser->getData();
+
+        $this->assertInstanceOf(Carbon::class, $data['date']);
+        $this->assertEquals('05/14/1988', $data['date']->format('m/d/Y'));
     }
 }
