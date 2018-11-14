@@ -18,4 +18,15 @@ class PressFileParserTest extends TestCase
         $this->assertContains('description: Description here', $data[1]);
         $this->assertContains('Blog post body here', $data[2]);
     }
+    
+    /** @test */
+    public function each_head_field_gets_separated()
+    {
+        $pressFileParser = (new PressFileParser(__DIR__.'/../blogs/MarkFile1.md'));
+
+        $data = $pressFileParser->getData();
+
+        $this->assertEquals('My Title', $data['title']);
+        $this->assertEquals('Description here', $data['description']);
+    }
 }
