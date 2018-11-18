@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "erusev/parsedown": "^1.7"
+        "erusev/parsedown": "^1.7",
+        "ext-json": "*"
     },
     "require-dev": {
         "orchestra/testbench": "^3.7"
