@@ -6,10 +6,19 @@ use vicgonvt\Press\MarkdownParser;
 
 class Body extends FieldContract
 {
-    public static function process($type, $value, $data)
+    /**
+     * Process the field and make any modifications.
+     *
+     * @param $fieldType
+     * @param $fieldValue
+     * @param $data
+     *
+     * @return array
+     */
+    public static function process($fieldType, $fieldValue, $data)
     {
         return [
-            $type => MarkdownParser::parse($value),
+            $fieldType => MarkdownParser::parse($fieldValue),
         ];
     }
 }
