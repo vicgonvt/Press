@@ -25,5 +25,12 @@
         "psr-4": {
             "vicgonvt\\Press\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "vicgonvt\\Press\\PressBaseServiceProvider"
+            ]
+        }
     }
 }

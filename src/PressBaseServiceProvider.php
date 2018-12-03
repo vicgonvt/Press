@@ -13,7 +13,9 @@ class PressBaseServiceProvider extends ServiceProvider
 
     public function register()
     {
-
+        $this->commands([
+            Console\ProcessCommand::class,
+        ]);
     }
 
     private function registerResources()
