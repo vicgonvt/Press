@@ -9,10 +9,26 @@ use vicgonvt\Press\PressFileParser;
 
 class ProcessCommand extends Command
 {
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
     protected $signature = 'press:process';
-    
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
     protected $description = 'Update blog posts.';
 
+
+    /**
+     * Execute the console command.
+     *
+     * @return void
+     */
     public function handle()
     {
         if (is_null(config('press'))) {

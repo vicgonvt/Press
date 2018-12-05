@@ -6,6 +6,11 @@ use Illuminate\Support\ServiceProvider;
 
 class PressBaseServiceProvider extends ServiceProvider
 {
+    /**
+     * Bootstrap any package services.
+     *
+     * @return void
+     */
     public function boot()
     {
         if ($this->app->runningInConsole()) {
@@ -15,6 +20,11 @@ class PressBaseServiceProvider extends ServiceProvider
         $this->registerResources();
     }
 
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
     public function register()
     {
         $this->commands([
@@ -22,11 +32,21 @@ class PressBaseServiceProvider extends ServiceProvider
         ]);
     }
 
+    /**
+     * Register the package resources.
+     *
+     * @return void
+     */
     private function registerResources()
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
+    /**
+     * Register the package's publishable resources.
+     *
+     * @return void
+     */
     protected function registerPublishing()
     {
         $this->publishes([
