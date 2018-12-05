@@ -5,6 +5,7 @@ namespace vicgonvt\Press\Console;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use vicgonvt\Press\Post;
+use vicgonvt\Press\Press;
 use vicgonvt\Press\PressFileParser;
 
 class ProcessCommand extends Command
@@ -31,23 +32,21 @@ class ProcessCommand extends Command
      */
     public function handle()
     {
-        if (is_null(config('press'))) {
+        if (Press::configNotPublished()) {
             return $this->warn('Please publish the config file by running ' .
                 '\'php artisan vendor:publish --tag=press-config\'');
         }
 
-        $files = File::files(config('press.path'));
+        $posts = Press::driver()->fetchPosts();
 
-        foreach ($files as $file) {
-            $post = (new PressFileParser($file->getPathname()))->getData();
+        foreach ($posts as $post) {
+            Post::create([
+                'identifier' => str_random(),
+                'slug' => str_slug($post['title']),
+                'title' => $post['title'],
+                'body' => $post['body'],
+                'extra' => $post['extra'] ?? [],
+            ]);
         }
-
-        Post::create([
-            'identifier' => str_random(),
-            'slug' => str_slug($post['title']),
-            'title' => $post['title'],
-            'body' => $post['body'],
-            'extra' => $post['extra'] ?? [],
-        ]);
     }
 }
