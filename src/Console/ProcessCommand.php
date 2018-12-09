@@ -5,6 +5,7 @@ namespace vicgonvt\Press\Console;
 use Illuminate\Console\Command;
 use vicgonvt\Press\Facades\Press;
 use vicgonvt\Press\Post;
+use vicgonvt\Press\Repositories\PostRepository;
 
 class ProcessCommand extends Command
 {
@@ -28,7 +29,7 @@ class ProcessCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(PostRepository $postRepository)
     {
         if (Press::configNotPublished()) {
             return $this->warn('Please publish the config file by running ' .
@@ -38,14 +39,12 @@ class ProcessCommand extends Command
         try {
             $posts = Press::driver()->fetchPosts();
 
+            $this->info('Number of Posts: ' . count($posts));
+
             foreach ($posts as $post) {
-                Post::create([
-                    'identifier' => $post['identifier'],
-                    'slug' => str_slug($post['title']),
-                    'title' => $post['title'],
-                    'body' => $post['body'],
-                    'extra' => $post['extra'] ?? [],
-                ]);
+                $postRepository->save($post);
+
+                $this->info('Post: ' . $post['title']);
             }
         } catch (\Exception $e) {
             $this->error($e->getMessage());
