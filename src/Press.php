@@ -9,7 +9,7 @@ class Press
      *
      * @return bool
      */
-    public static function configNotPublished()
+    public function configNotPublished()
     {
         return is_null(config('press'));
     }
@@ -19,7 +19,7 @@ class Press
      *
      * @return mixed
      */
-    public static function driver()
+    public function driver()
     {
         $driver = title_case(config('press.driver'));
         $class = 'vicgonvt\Press\Drivers\\' . $driver . 'Driver';
@@ -27,7 +27,7 @@ class Press
         return new $class;
     }
 
-    public static function path()
+    public function path()
     {
         return config('press.path', 'blogs');
     }
