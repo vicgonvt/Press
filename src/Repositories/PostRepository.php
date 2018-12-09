@@ -6,6 +6,13 @@ use vicgonvt\Press\Post;
 
 class PostRepository
 {
+    /**
+     * Takes a post array and updates or creates it on the database.
+     *
+     * @param $post
+     *
+     * @return void
+     */
     public function save($post)
     {
         Post::updateOrCreate([

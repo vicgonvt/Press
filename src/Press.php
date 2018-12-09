@@ -27,6 +27,11 @@ class Press
         return new $class;
     }
 
+    /**
+     * Get the currently set URI path for the blog.
+     *
+     * @return string
+     */
     public function path()
     {
         return config('press.path', 'blogs');

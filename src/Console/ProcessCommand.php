@@ -4,7 +4,6 @@ namespace vicgonvt\Press\Console;
 
 use Illuminate\Console\Command;
 use vicgonvt\Press\Facades\Press;
-use vicgonvt\Press\Post;
 use vicgonvt\Press\Repositories\PostRepository;
 
 class ProcessCommand extends Command
@@ -26,6 +25,8 @@ class ProcessCommand extends Command
 
     /**
      * Execute the console command.
+     *
+     * @param \vicgonvt\Press\Repositories\PostRepository $postRepository
      *
      * @return mixed
      */
