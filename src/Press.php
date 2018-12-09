@@ -26,4 +26,9 @@ class Press
 
         return new $class;
     }
+
+    public static function path()
+    {
+        return config('press.path', 'blogs');
+    }
 }
