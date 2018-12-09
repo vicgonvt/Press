@@ -85,6 +85,11 @@ class PressBaseServiceProvider extends ServiceProvider
         ];
     }
 
+    /**
+     * Register any bindings to the app.
+     *
+     * @return void
+     */
     protected function registerFacades()
     {
         $this->app->singleton('Press', function ($app) {
