@@ -58,6 +58,11 @@ class PressBaseServiceProvider extends ServiceProvider
         ], 'press-config');
     }
 
+    /**
+     * Register the package routes.
+     *
+     * @return void
+     */
     protected function registerRoutes()
     {
         Route::group($this->routeConfiguration(), function () {
@@ -65,6 +70,11 @@ class PressBaseServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * Get the Press route group configuration array.
+     *
+     * @return array
+     */
     private function routeConfiguration()
     {
         return [
