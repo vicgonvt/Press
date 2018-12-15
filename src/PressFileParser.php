@@ -4,6 +4,7 @@ namespace vicgonvt\Press;
 
 use Illuminate\Support\Facades\File;
 use ReflectionClass;
+use vicgonvt\Press\Facades\Press;
 
 class PressFileParser
 {
@@ -26,6 +27,8 @@ class PressFileParser
      * PressFileParser constructor.
      *
      * @param $filename
+     *
+     * @throws \ReflectionException
      */
     public function __construct($filename)
     {
@@ -93,6 +96,7 @@ class PressFileParser
      * all class called Extra, where they will be merged and JSON encoded in extra.
      *
      * @return void
+     * @throws \ReflectionException
      */
     protected function processFields()
     {
@@ -111,9 +115,17 @@ class PressFileParser
         }
     }
 
+    /**
+     * Attempt to find a field by the same name out of the array of available fields.
+     *
+     * @param $field
+     *
+     * @return string
+     * @throws \ReflectionException
+     */
     private function getField($field)
     {
-        foreach (\vicgonvt\Press\Facades\Press::availableFields() as $availableField) {
+        foreach (Press::availableFields() as $availableField) {
             $class = new ReflectionClass($availableField);
 
             if ($class->getShortName() == $field) {

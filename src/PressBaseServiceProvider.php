@@ -102,6 +102,11 @@ class PressBaseServiceProvider extends ServiceProvider
         });
     }
 
+    /**
+     * Register any default fields to the app.
+     *
+     * @return void
+     */
     private function registerFields()
     {
         Press::fields([

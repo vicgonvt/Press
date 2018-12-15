@@ -4,6 +4,9 @@ namespace vicgonvt\Press;
 
 class Press
 {
+    /**
+     * @var array
+     */
     protected $fields = [];
 
     /**
@@ -39,11 +42,21 @@ class Press
         return config('press.path', 'blogs');
     }
 
+    /**
+     * Merges an array of fields into the fields variable.
+     *
+     * @param array $fields
+     */
     public function fields(array $fields)
     {
         $this->fields = array_merge($this->fields, $fields);
     }
 
+    /**
+     * Returns the list of available fields in reverse order.
+     *
+     * @return array
+     */
     public function availableFields()
     {
         return array_reverse($this->fields);

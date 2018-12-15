@@ -25,6 +25,13 @@ class PostRepository
         ]);
     }
 
+    /**
+     * Collect all of the extra fields to set it as a json string.
+     *
+     * @param $post
+     *
+     * @return false|string
+     */
     private function extra($post)
     {
         $extra = (array)json_decode($post['extra'] ?? '[]');
