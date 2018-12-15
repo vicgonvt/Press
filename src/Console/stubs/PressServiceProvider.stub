@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use vicgonvt\Press\Facades\Press;
+
+class PressServiceProvider extends ServiceProvider
+{
+    public function boot()
+    {
+        Press::fields($this->registerFields());
+    }
+
+    public function register()
+    {
+        //
+    }
+
+    protected function registerFields()
+    {
+        return [
+            //
+        ];
+    }
+}

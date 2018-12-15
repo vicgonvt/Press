@@ -3,6 +3,7 @@
 namespace vicgonvt\Press;
 
 use Illuminate\Support\Facades\File;
+use ReflectionClass;
 
 class PressFileParser
 {
@@ -97,7 +98,7 @@ class PressFileParser
     {
         foreach ($this->data as $field => $value) {
 
-            $class = 'vicgonvt\\Press\\Fields\\' . title_case($field);
+            $class = $this->getField(title_case($field));
 
             if ( ! class_exists($class) && ! method_exists($class, 'process')) {
                 $class = 'vicgonvt\\Press\\Fields\\Extra';
@@ -107,6 +108,17 @@ class PressFileParser
                 $this->data,
                 $class::process($field, $value, $this->data)
             );
+        }
+    }
+
+    private function getField($field)
+    {
+        foreach (\vicgonvt\Press\Facades\Press::availableFields() as $availableField) {
+            $class = new ReflectionClass($availableField);
+
+            if ($class->getShortName() == $field) {
+                return $class->getName();
+            }
         }
     }
 }

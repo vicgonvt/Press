@@ -46,6 +46,7 @@ class PressBaseServiceProvider extends ServiceProvider
 
         $this->registerFacades();
         $this->registerRoutes();
+        $this->registerFields();
     }
 
     /**
@@ -58,6 +59,10 @@ class PressBaseServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/press.php' => config_path('press.php'),
         ], 'press-config');
+
+        $this->publishes([
+            __DIR__.'/Console/stubs/PressServiceProvider.stub' => app_path('Providers/PressServiceProvider.php'),
+        ], 'press-provider');
     }
 
     /**
@@ -95,5 +100,16 @@ class PressBaseServiceProvider extends ServiceProvider
         $this->app->singleton('Press', function ($app) {
             return new \vicgonvt\Press\Press();
         });
+    }
+
+    private function registerFields()
+    {
+        Press::fields([
+            Fields\Body::class,
+            Fields\Date::class,
+            Fields\Description::class,
+            Fields\Extra::class,
+            Fields\Title::class,
+        ]);
     }
 }

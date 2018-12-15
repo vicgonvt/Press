@@ -4,6 +4,8 @@ namespace vicgonvt\Press;
 
 class Press
 {
+    protected $fields = [];
+
     /**
      * Check if Press config file has been published and set.
      *
@@ -35,5 +37,15 @@ class Press
     public function path()
     {
         return config('press.path', 'blogs');
+    }
+
+    public function fields(array $fields)
+    {
+        $this->fields = array_merge($this->fields, $fields);
+    }
+
+    public function availableFields()
+    {
+        return array_reverse($this->fields);
     }
 }
