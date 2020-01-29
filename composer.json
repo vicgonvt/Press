@@ -10,11 +10,11 @@
     ],
     "require": {
         "erusev/parsedown": "^1.7",
-        "php": "^7.0",
+        "php": "^7.2",
         "ext-json": "*"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.7",
+        "orchestra/testbench": "^4.0",
         "mockery/mockery": "^1.2"
     },
     "autoload": {

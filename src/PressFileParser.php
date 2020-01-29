@@ -3,6 +3,7 @@
 namespace vicgonvt\Press;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use ReflectionClass;
 use vicgonvt\Press\Facades\Press;
 
@@ -102,7 +103,7 @@ class PressFileParser
     {
         foreach ($this->data as $field => $value) {
 
-            $class = $this->getField(title_case($field));
+            $class = $this->getField(Str::title($field));
 
             if ( ! class_exists($class) && ! method_exists($class, 'process')) {
                 $class = 'vicgonvt\\Press\\Fields\\Extra';

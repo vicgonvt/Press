@@ -2,6 +2,7 @@
 
 namespace vicgonvt\Press\Drivers;
 
+use Illuminate\Support\Str;
 use vicgonvt\Press\PressFileParser;
 
 abstract class Driver
@@ -65,7 +66,7 @@ abstract class Driver
     {
         $this->posts[] = array_merge(
             (new PressFileParser($content))->getData(),
-            ['identifier' => str_slug($identifier)]
+            ['identifier' => Str::slug($identifier)]
         );
     }
 }
