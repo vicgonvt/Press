@@ -2,6 +2,8 @@
 
 namespace vicgonvt\Press\Repositories;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use vicgonvt\Press\Post;
 
 class PostRepository
@@ -18,7 +20,7 @@ class PostRepository
         Post::updateOrCreate([
             'identifier' => $post['identifier'],
         ], [
-            'slug' => str_slug($post['title']),
+            'slug' => Str::slug($post['title']),
             'title' => $post['title'],
             'body' => $post['body'],
             'extra' => $this->extra($post),
@@ -35,7 +37,7 @@ class PostRepository
     private function extra($post)
     {
         $extra = (array)json_decode($post['extra'] ?? '[]');
-        $attributes = array_except($post, ['title', 'body', 'identifier', 'extra']);
+        $attributes = Arr::except($post, ['title', 'body', 'identifier', 'extra']);
 
         return json_encode(array_merge($extra, $attributes));
     }

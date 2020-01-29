@@ -14,9 +14,9 @@ class PressFileParserTest extends TestCase
 
         $data = $pressFileParser->getRawData();
 
-        $this->assertContains('title: My Title', $data[1]);
-        $this->assertContains('description: Description here', $data[1]);
-        $this->assertContains('Blog post body here', $data[2]);
+        $this->assertStringContainsString('title: My Title',$data[1]);
+        $this->assertStringContainsString('description: Description here', $data[1]);
+        $this->assertStringContainsString('Blog post body here', $data[2]);
     }
     
     /** @test */
@@ -26,8 +26,8 @@ class PressFileParserTest extends TestCase
 
         $data = $pressFileParser->getRawData();
 
-        $this->assertContains('title: My Title', $data[1]);
-        $this->assertContains('Blog post body here', $data[2]);
+        $this->assertStringContainsString('title: My Title', $data[1]);
+        $this->assertStringContainsString('Blog post body here', $data[2]);
     }
     
     /** @test */

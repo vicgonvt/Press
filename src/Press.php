@@ -2,6 +2,8 @@
 
 namespace vicgonvt\Press;
 
+use Illuminate\Support\Str;
+
 class Press
 {
     /**
@@ -26,7 +28,7 @@ class Press
      */
     public function driver()
     {
-        $driver = title_case(config('press.driver'));
+        $driver = Str::title(config('press.driver'));
         $class = 'vicgonvt\Press\Drivers\\' . $driver . 'Driver';
 
         return new $class;
